@@ -9,8 +9,8 @@ const catchAsync = require("./utils/catchAsync");
 const { campgroundSchema } = require("./schemas");
 const { urlencoded } = require("express");
 
+// setup database connection
 mongoose.connect("mongodb://localhost:27017/yelp-camp");
-
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
