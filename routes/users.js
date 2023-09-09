@@ -36,6 +36,7 @@ router.get("/login", (req, res) => {
 
 router.post(
   "/login",
+  // use the storeReturnTo middleware to save the returnTo value from session to res.locals
   storeReturnTo,
   passport.authenticate("local", {
     failureFlash: true,
