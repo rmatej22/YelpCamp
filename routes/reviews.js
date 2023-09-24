@@ -23,6 +23,7 @@ router.post(
 
 router.delete(
   "/:reviewId",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
