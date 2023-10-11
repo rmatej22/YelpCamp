@@ -6,4 +6,11 @@ const map = new mapboxgl.Map({
   zoom: 12, // starting zoom
 });
 
-new mapboxgl.Marker().setLngLat(campground.geometry.coordinates).addTo(map);
+new mapboxgl.Marker()
+  .setPopup(
+    new mapboxgl.Popup({ offset: 25 }).setHTML(
+      `<h3>${campground.title}</h3><p>${campground.location}</p>`
+    )
+  )
+  .setLngLat(campground.geometry.coordinates)
+  .addTo(map);
