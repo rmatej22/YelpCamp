@@ -6,6 +6,9 @@ const map = new mapboxgl.Map({
   zoom: 12, // starting zoom
 });
 
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
 new mapboxgl.Marker()
   .setPopup(
     new mapboxgl.Popup({ offset: 25 }).setHTML(
