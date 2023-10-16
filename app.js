@@ -20,9 +20,11 @@ const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const mongoSanitize = require("express-mongo-sanitize");
+const dbUrl = process.env.DB_URL;
 
 // setup database connection
-mongoose.connect("mongodb://localhost:27017/yelp-camp");
+// old connection --> "mongodb://localhost:27017/yelp-camp"
+mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -82,22 +84,22 @@ const connectSrcUrls = [
 const fontSrcUrls = [];
 app.use(
   helmet.contentSecurityPolicy({
-      directives: {
-          defaultSrc: [],
-          connectSrc: ["'self'", ...connectSrcUrls],
-          scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-          styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-          workerSrc: ["'self'", "blob:"],
-          objectSrc: [],
-          imgSrc: [
-              "'self'",
-              "blob:",
-              "data:",
-              "https://res.cloudinary.com/drtnaw44y/",
-              "https://images.unsplash.com/",
-          ],
-          fontSrc: ["'self'", ...fontSrcUrls],
-      },
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/drtnaw44y/",
+        "https://images.unsplash.com/",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
   })
 );
 
