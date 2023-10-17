@@ -6,6 +6,7 @@ const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
 const users = require("../controllers/users");
 
+// we can group routes like this to make code more readable and shorter using express.Router()
 router
   .route("/register")
   .get(users.renderRegister)

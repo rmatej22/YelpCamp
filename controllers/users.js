@@ -7,6 +7,7 @@ module.exports.renderRegister = (req, res) => {
 module.exports.register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    // some methods like .register on User model we get from passport, that method is not from express
     const user = new User({ username, email });
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (error) => {

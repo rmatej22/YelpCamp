@@ -1,6 +1,7 @@
 const BaseJoi = require('joi');
 const sanitizeHtml = require('sanitize-html');
 
+// we use this logic to prevent xss attacks
 const extension = (joi) => ({
     type: 'string',
     base: joi.string(),
@@ -20,11 +21,15 @@ const extension = (joi) => ({
         }
     }
 });
-
+// this is where we implement new extension
 const Joi = BaseJoi.extend(extension)
 
+// Joi module is a popular module for data validation.
+// This module validates the data based on schemas.
+// There are various functions like optional(), required(), min(), max(), etc which make it easy to use and a user-friendly module for validating the data.
 module.exports.campgroundSchema = Joi.object({
   campground: Joi.object({
+    // this is where we use our extension .escapeHTML()
     title: Joi.string().required().escapeHTML(),
     price: Joi.number().required().min(0),
     // image: Joi.string().required(),
